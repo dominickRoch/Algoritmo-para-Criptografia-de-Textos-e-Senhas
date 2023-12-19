@@ -114,6 +114,60 @@ Abordagem que faz escolhas locais ótimas em cada estágio, na esperança de ati
 Backtracking:
 Solução de problemas por tentativa e erro, gerando todas as possíveis soluções e retrocedendo quando uma solução parcial não pode ser completada para uma solução válida. Útil para problemas de decisão que podem ser estruturados como uma árvore de escolhas.
 
+Aplicação: 
+A otimização do laço pode ser valiosa. Por exemplo, ao evitar processar caracteres que não precisam ser criptografados (como espaços e pontuações), assim vou reduzir o tempo de execução.
 
+void criptografiaOtimizada(char *texto, int chave) {
+    int tam = strlen(texto);
 
+    for (int i = 0; i < tam; i++) {
+        char CharAtual = texto[i];
 
+        if ((CharAtual >= 'A' && CharAtual <= 'Z') || (CharAtual >= 'a' && CharAtual <= 'z')) {
+            char base = (CharAtual >= 'A' && CharAtual <= 'Z') ? 'A' : 'a';
+            text[i] = (CharAtual - base + chave) % 26 + base;
+        }
+    }
+}
+
+10.
+Cifragem e Descriptografia:
+A cifragem e descriptografia envolvem um único loop que percorre cada caractere do texto, realizando operações constantes. Por isso a complexidade temporal é linear em relação ao tamanho do texto.
+Complexidade Temporal: O(n), onde n é o tamanho do texto.
+
+A cifragem e descriptografia não exigem espaço adicional proporcional ao tamanho do texto. As operações são realizadas in-place, modificando diretamente o texto original.
+Complexidade Espacial: O(1)
+
+Ambas as versões, a inicial e a aprimorada, apresentam complexidade temporal e espacial eficientes. A principal diferença está na otimização do laço para reduzir o número de operações desnecessárias na versão aprimorada, resultando em uma melhoria no desempenho prático, especialmente para textos mais longos.
+
+11.
+Algoritmo Inicial:
+Implementação simples e direta da cifra de César.
+Complexidade temporal e espacial eficientes.
+Código claro e fácil de entender.
+
+Algoritmo Aprimorado:
+Otimização do laço para reduzir operações desnecessárias.
+Complexidade temporal e espacial mantidas eficientes.
+Possível melhoria prática no desempenho para textos mais longos.
+
+Análise de Complexidade;
+
+Complexidade Temporal:
+Ambas as versões (inicial e aprimorada) têm complexidade temporal 
+O(n), linear em relação ao tamanho do texto.
+Eficientes para textos de tamanho moderado.
+
+Complexidade Espacial:
+Ambas as versões têm complexidade espacial 
+O(1), constante, indicando uso fixo de memória independente do tamanho do texto.
+Boa eficiência de uso de recursos.
+
+Resultados e Conclusões;
+
+Comparação entre Versões:
+Ambas as versões são eficientes e oferecem desempenho satisfatório.
+A versão aprimorada otimiza o laço, proporcionando pequena melhoria no desempenho prático.
+
+Escolha entre Versões:
+A escolha entre as versões pode depender das preferências de legibilidade do código e da importância de otimizações incrementais no contexto específico da aplicação.
