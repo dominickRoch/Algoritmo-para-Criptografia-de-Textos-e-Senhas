@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
+#define TAMANHO_HASH 128
+
+void criptografar(char *texto, int chave) {
+    int tamanho = strlen(texto);
+
+    for (int i = 0; i < tamanho; i++) {
+        if (texto[i] >= 'A' && texto[i] <= 'Z') {
+            texto[i] = (texto[i] - 'A' + chave) % 26 + 'A';
+        } else if (texto[i] >= 'a' && texto[i] <= 'z') {
+            texto[i] = (texto[i] - 'a' + chave) % 26 + 'a';
+        }
+    }
+}
+
+void descriptografar(char *texto, int chave) {
+    criptografar(texto, 26 - chave);
+}
+
+int main() {
+    clock_t inicio, fim;
+    
+    char textoOriginal[256];
+    int chave;
+
+    printf("Digite o texto a ser criptografado: ");
+    fgets(textoOriginal, sizeof(textoOriginal), stdin);
+    printf("Digite a chave de criptografia: ");
+    scanf("%d", &chave);
+
+    textoOriginal[strcspn(textoOriginal, "\n")] = '\0';
+
+    // Medição de tempo inicial
+    inicio = clock();
+
+    // Criptografar
+    criptografar(textoOriginal, chave);
+    printf("Texto criptografado: %s\n", textoOriginal);
+
+    // Descriptografar
+    descriptografar(textoOriginal, chave);
+    printf("Texto descriptografado: %s\n", textoOriginal);
+
+    // Medicao de tempo final
+    fim = clock();
+    
+    // Calcular tempo decorrido
+    double tempo_decorrido = ((double) (fim - inicio)) / CLOCKS_PER_SEC;
+    printf("Tempo de execução: %f segundos\n", tempo_decorrido);
+
+    return 0;
+}
