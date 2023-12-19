@@ -3,8 +3,6 @@
 #include <string.h>
 #include <time.h>
 
-#define TAMANHO_HASH 128
-
 void criptografar(char *texto, int chave) {
     int tamanho = strlen(texto);
 
