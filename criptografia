@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+// Funcao para criptografar o texto usando cifra de cesar
+void criptografar(char *texto, int chave) {
+    int tamanho = strlen(texto);
+
+    for (int i = 0; i < tamanho; i++) {
+        if (texto[i] >= 'A' && texto[i] <= 'Z') {
+            texto[i] = (texto[i] - 'A' + chave) % 26 + 'A';
+        } else if (texto[i] >= 'a' && texto[i] <= 'z') {
+            texto[i] = (texto[i] - 'a' + chave) % 26 + 'a';
+        }
+    }
+}
+
+// Funcao para descriptografar
+void descriptografar(char *texto, int chave) {
+    criptografar(texto, 26 - chave);  
+}
+
+
+int main() {
+    
+    char textoOriginal[256];
+    int chave;
+
+    printf("Digite o texto a ser criptografado: ");
+    fgets(textoOriginal, sizeof(textoOriginal), stdin);
+    printf("Digite a chave de criptografia: ");
+    scanf("%d", &chave);
+
+    // remover o caractere de nova linha deixado por fgets
+    textoOriginal[strcspn(textoOriginal, "\n")] = '\0';
+
+    // criptografar
+    criptografar(textoOriginal, chave);
+    printf("Texto criptografado: %s\n", textoOriginal);
+
+    // descriptografar
+    descriptografar(textoOriginal, chave);
+    printf("Texto descriptografado: %s\n", textoOriginal);
+    
+
+    return 0;
+}
